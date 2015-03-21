@@ -46,7 +46,7 @@ The resume has four distinct sections: work, education, projects and a header wi
             biopic: url
             display: function taking no parameters
 
-* `education` contains:
+    * `education` contains:
       
             schools: array of objects with
                  name: string

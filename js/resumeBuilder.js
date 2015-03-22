@@ -1,7 +1,4 @@
-var formattedName=HTMLheaderName.replace('%data%','Evan Cosmo');
-var formattedRole=HTMLheaderRole.replace('%data%','Full Stack Developer');
 
-$("#header").prepend(formattedRole).prepend(formattedName);
 
 var bio=   {"name" : "Evan Cosmo",
     "role" : "Full Stack Developer",
@@ -16,20 +13,33 @@ var bio=   {"name" : "Evan Cosmo",
     "biopic": "http://www.gundamcore.it/wp-content/uploads/gundam-seed-2.jpg"
     };
 
-var mobile=HTMLmobile.replace('%data%',bio.contacts.mobile);
-var email=HTMLemail.replace('%data%',bio.contacts.email);
-var twitter=HTMLtwitter.replace('%data%',bio.contacts.twitter);
-var giturl=HTMLgithub.replace('%data%',bio.contacts.github);
-var mylocation=HTMLlocation.replace('%data%',bio.contacts.location);
+bio.display = function () {
+    var formattedName=HTMLheaderName.replace('%data%',bio.name);
+    var formattedRole=HTMLheaderRole.replace('%data%',bio.role);
 
-$("#topContacts").append(mobile).append(email).append(twitter).append(giturl).append(mylocation);
+    $("#header").prepend(formattedRole).prepend(formattedName);
+    var mobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
+    var email = HTMLemail.replace('%data%', bio.contacts.email);
+    var twitter = HTMLtwitter.replace('%data%', bio.contacts.twitter);
+    var giturl = HTMLgithub.replace('%data%', bio.contacts.github);
+    var mylocation = HTMLlocation.replace('%data%', bio.contacts.location);
 
-$("#footerContacts").append(mobile).append(email).append(twitter).append(giturl).append(mylocation);
+    $("#topContacts").append(mobile).append(email).append(twitter).append(giturl).append(mylocation);
 
-var imgurl=HTMLbioPic.replace('%data%',bio.biopic);
-var welcome=HTMLwelcomeMsg.replace('%data%',bio.welcomeMessage);
-$("#header").append(imgurl).append(welcome);
+    $("#footerContacts").append(mobile).append(email).append(twitter).append(giturl).append(mylocation);
 
+    var imgurl = HTMLbioPic.replace('%data%', bio.biopic);
+    var welcome = HTMLwelcomeMsg.replace('%data%', bio.welcomeMessage);
+    $("#header").append(imgurl).append(welcome);
+    if (bio.skills.length > 0) {
+        $("#header").append(HTMLskillsStart);
+        for (var i = 0, len = bio.skills.length; i < len; i++) {
+            var skillitem = HTMLskills.replace('%data%', bio.skills[i]);
+            $("#skills").append(skillitem);
+        }
+    }
+};
+bio.display();
 var education ={
     "schools": [
         {
@@ -126,13 +136,7 @@ var project={
     ]
 };
 
-if (bio.skills.length>0) {
-    $("#header").append(HTMLskillsStart);
-    for (var i = 0, len = bio.skills.length; i < len; i++) {
-         var skillitem=HTMLskills.replace('%data%',bio.skills[i]);
-        $("#skills").append(skillitem);
-    }
-}
+
 
 work.display=function () {
     for (var jobnum in work.jobs) {
